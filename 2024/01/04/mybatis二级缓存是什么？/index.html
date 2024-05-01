@@ -1,0 +1,268 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Mybatis二级缓存是什么 | Ethan's Knowledge Hut</title><meta name="author" content="Ethan"><meta name="copyright" content="Ethan"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="ffffff"><meta name="description" content="Mybatis二级缓存是什么">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Mybatis二级缓存是什么">
+<meta property="og:url" content="http://example.com/2024/01/04/mybatis%E4%BA%8C%E7%BA%A7%E7%BC%93%E5%AD%98%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F/index.html">
+<meta property="og:site_name" content="Ethan&#39;s Knowledge Hut">
+<meta property="og:description" content="Mybatis二级缓存是什么">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://w.wallhaven.cc/full/ex/wallhaven-exrqrr.jpg">
+<meta property="article:published_time" content="2024-01-04T05:00:00.000Z">
+<meta property="article:modified_time" content="2024-03-04T09:58:01.378Z">
+<meta property="article:author" content="Ethan">
+<meta property="article:tag" content="MySQL">
+<meta property="article:tag" content="Mybatis">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://w.wallhaven.cc/full/ex/wallhaven-exrqrr.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2024/01/04/mybatis%E4%BA%8C%E7%BA%A7%E7%BC%93%E5%AD%98%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//hm.baidu.com"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=4.13.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?73c32659cf386aa28a615345d8d0b897";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.11.1/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Mybatis二级缓存是什么',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-03-04 17:58:01'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', 'ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 7.1.1"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><script>(()=>{
+  const $loadingBox = document.getElementById('loading-box')
+  const $body = document.body
+  const preloader = {
+    endLoading: () => {
+      $body.style.overflow = ''
+      $loadingBox.classList.add('loaded')
+    },
+    initLoading: () => {
+      $body.style.overflow = 'hidden'
+      $loadingBox.classList.remove('loaded')
+    }
+  }
+
+  preloader.initLoading()
+  window.addEventListener('load',() => { preloader.endLoading() })
+
+  if (false) {
+    document.addEventListener('pjax:send', () => { preloader.initLoading() })
+    document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+  }
+})()</script><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://myth-picture.oss-cn-beijing.aliyuncs.com/b_c5889573e79ba39f657f4ad01e0af210.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">13</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">7</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://w.wallhaven.cc/full/ex/wallhaven-exrqrr.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="Ethan's Knowledge Hut"><span class="site-name">Ethan's Knowledge Hut</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Mybatis二级缓存是什么</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-01-04T05:00:00.000Z" title="发表于 2024-01-04 13:00:00">2024-01-04</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-03-04T09:58:01.378Z" title="更新于 2024-03-04 17:58:01">2024-03-04</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Linux/">Linux</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">1.3k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>3分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Mybatis二级缓存是什么"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="二级缓存"><a href="#二级缓存" class="headerlink" title="二级缓存"></a>二级缓存</h1><h2 id="什么是二级缓存"><a href="#什么是二级缓存" class="headerlink" title="什么是二级缓存"></a>什么是二级缓存</h2><p>MyBatis 中的二级缓存是指作用于映射器（Mapper）范围的缓存，也就是<strong>跨多个 SqlSession 的会话缓存</strong>。当开启二级缓存后，MyBatis 将会使用一个全局的缓存来存储查询结果，这个缓存的生命周期更长，可以跨越多个 SqlSession。</p>
+<h2 id="二级缓存的作用"><a href="#二级缓存的作用" class="headerlink" title="二级缓存的作用"></a>二级缓存的作用</h2><p>MyBatis 的二级缓存主要作用是减少数据库查询次数，提高数据访问的效率。它是跨 SqlSession 的，在 Mapper 级别共享，这意味着当不同的 SqlSession 执行相同的查询时，可以重用之前查询的结果，而不需要再次执行数据库操作。</p>
+<ol>
+<li><p><strong>提高性能</strong>：二级缓存可以大幅减少对数据库的查询次数，特别是对于那些不经常变化的数据，通过缓存可以快速获取结果，从而加快应用程序的响应速度。</p>
+</li>
+<li><p><strong>减少数据库负载</strong>：通过使用缓存，减少了对数据库的直接访问，这可以在高并发场景下显著降低数据库的压力，保护数据库不被过度使用。</p>
+</li>
+<li><p><strong>跨会话共享</strong>：不同用户或请求的相同数据可以被缓存在二级缓存中，实现跨会话共享，这对于读多写少的应用场景尤其有益。</p>
+</li>
+<li><p><strong>支持分布式</strong>：通过集成第三方缓存管理器（如 Ehcache、Redis 等），MyBatis 的二级缓存还可以支持分布式缓存，这使得在集群环境中的应用能够共享缓存数据，进一步提升应用的可伸缩性和性能。</p>
+</li>
+</ol>
+<h2 id="二级缓存的使用场景"><a href="#二级缓存的使用场景" class="headerlink" title="二级缓存的使用场景"></a>二级缓存的使用场景</h2><ol>
+<li><p><strong>读操作远多于写操作</strong>：如果应用主要执行数据库查询操作，而数据库更新操作不太频繁，那么使用二级缓存可以保持数据被高效读取。</p>
+</li>
+<li><p><strong>数据库负载较高</strong>：当应用面临高并发请求时，如果数据库查询成为瓶颈，二级缓存可以减少对数据库的直接查询压力。</p>
+</li>
+<li><p><strong>数据变化不频繁</strong>：如果数据变动不是很频繁，并且可以容忍一些延时（数据不需要实时更新），那么二级缓存可以提供较为静态的数据，减少数据库访问。</p>
+</li>
+<li><p><strong>对数据库响应时间有严格要求</strong>：如果系统需要快速响应用户请求，二级缓存可以减少查询延迟，提供更快的数据访问速度。</p>
+</li>
+<li><p><strong>数据一致性要求不是非常严格</strong>：在一些情况下，数据的绝对一致性不是特别关键，可以接受短时间内数据的轻微不一致。</p>
+</li>
+<li><p><strong>分布式系统</strong>：如果你的应用是分布式的，缓存可以配置成分布式缓存，这样不同的服务器实例可以共享缓存数据，从而减少本地服务器和数据库服务器的压力。</p>
+</li>
+<li><p><strong>系统资源有限</strong>：如果服务器资源（如 CPU、内存）相对有限，使用二级缓存可以减少资源的消耗，尤其是 CPU 和 I&#x2F;O 资源。</p>
+</li>
+</ol>
+<h2 id="二级缓存和一级缓存之间的区别"><a href="#二级缓存和一级缓存之间的区别" class="headerlink" title="二级缓存和一级缓存之间的区别"></a>二级缓存和一级缓存之间的区别</h2><p>一级缓存（Local Cache）：</p>
+<ul>
+<li><strong>作用范围</strong>：一级缓存是 MyBatis 中的默认缓存，它的作用范围仅限于同一个 SqlSession 内部。如果在同一个 SqlSession 内部执行多次相同的 SQL 查询，第一次查询之后的结果会被缓存在这个 SqlSession 中，后续的相同查询就可以直接从缓存中获取结果，而不需要再次访问数据库。</li>
+<li><strong>生命周期</strong>：一级缓存随着 SqlSession 的生命周期开始和结束。当 SqlSession 关闭或者提交更改时（如执行了 insert、update 或 delete 操作），一级缓存就会清空。</li>
+</ul>
+<p>二级缓存（Global Cache）：</p>
+<ul>
+<li><strong>作用范围</strong>：二级缓存是跨 SqlSession 的。它可以被多个 SqlSession 共享，也就是说，不同的 SqlSession 可以共享相同的缓存数据。</li>
+<li><strong>配置</strong>：二级缓存需要在 MyBatis 的配置文件中显式地开启，并且通常需要对它进行更为详细的配置，比如缓存大小、清除策略等。</li>
+<li><strong>生命周期</strong>：二级缓存的生命周期可以跨越多个 SqlSession，可以长久地存储数据，直到达到缓存的某种清除条件，如缓存满了、时间过期或手动清除。</li>
+</ul>
+<blockquote>
+<p>[!example] 实例场景</p>
+</blockquote>
+<p>考虑一个在线商城应用，其中有一个商品信息页面，用户可能会频繁地查询同一商品的信息。</p>
+<ul>
+<li><strong>使用一级缓存</strong>：当用户在同一用户会话（即 SqlSession）中多次查询同一商品时，商品信息可以从一级缓存中直接获取，提高了该会话的查询效率。</li>
+<li><strong>使用二级缓存</strong>：当不同的用户（即不同的 SqlSession）查询同一商品信息时，如果该信息已经被缓存到二级缓存中，那么无论是哪个用户会话查询都可以直接从二级缓存中获取结果，显著减少了数据库访问次数。</li>
+</ul>
+</article><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/MySQL/">MySQL</a><a class="post-meta__tags" href="/tags/Mybatis/">Mybatis</a></div><div class="post_share"></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2024/01/07/MySQL%E4%BA%8B%E5%8A%A1/" title="MySQL事务"><img class="cover" src="https://w.wallhaven.cc/full/ex/wallhaven-exrqrr.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">MySQL事务</div></div></a></div><div class="next-post pull-right"><a href="/2024/01/02/SQL%E8%AF%AD%E5%8F%A5%E7%9A%84%E6%89%A7%E8%A1%8C%E6%B5%81%E7%A8%8B/" title="SQL语句的执行流程"><img class="cover" src="https://w.wallhaven.cc/full/ex/wallhaven-exrqrr.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">SQL语句的执行流程</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2024/01/01/CentOS%E5%AE%89%E8%A3%85Mysql/" title="CentOS安装MySQL"><img class="cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="fas fa-history fa-fw"></i> 2024-02-25</div><div class="title">CentOS安装MySQL</div></div></a></div><div><a href="/2024/01/02/SQL%E8%AF%AD%E5%8F%A5%E7%9A%84%E6%89%A7%E8%A1%8C%E6%B5%81%E7%A8%8B/" title="SQL语句的执行流程"><img class="cover" src="https://w.wallhaven.cc/full/ex/wallhaven-exrqrr.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="fas fa-history fa-fw"></i> 2024-02-26</div><div class="title">SQL语句的执行流程</div></div></a></div><div><a href="/2024/01/07/MySQL%E4%BA%8B%E5%8A%A1/" title="MySQL事务"><img class="cover" src="https://w.wallhaven.cc/full/ex/wallhaven-exrqrr.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="fas fa-history fa-fw"></i> 2024-03-04</div><div class="title">MySQL事务</div></div></a></div><div><a href="/2024/01/07/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B4%A2%E5%BC%95/" title="MySQL索引"><img class="cover" src="https://w.wallhaven.cc/full/ex/wallhaven-exrqrr.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="fas fa-history fa-fw"></i> 2024-03-04</div><div class="title">MySQL索引</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%8C%E7%BA%A7%E7%BC%93%E5%AD%98"><span class="toc-number">1.</span> <span class="toc-text">二级缓存</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E4%BA%8C%E7%BA%A7%E7%BC%93%E5%AD%98"><span class="toc-number">1.1.</span> <span class="toc-text">什么是二级缓存</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E7%BA%A7%E7%BC%93%E5%AD%98%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="toc-number">1.2.</span> <span class="toc-text">二级缓存的作用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E7%BA%A7%E7%BC%93%E5%AD%98%E7%9A%84%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="toc-number">1.3.</span> <span class="toc-text">二级缓存的使用场景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E7%BA%A7%E7%BC%93%E5%AD%98%E5%92%8C%E4%B8%80%E7%BA%A7%E7%BC%93%E5%AD%98%E4%B9%8B%E9%97%B4%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-number">1.4.</span> <span class="toc-text">二级缓存和一级缓存之间的区别</span></a></li></ol></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2023 - 2024 By Ethan</div><div class="footer_custom_text">Hi, welcome to my <a target="_blank" rel="noopener" href="https://ethan-tsui.github.io/">blog</a>!</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="chat-btn" type="button" title="聊天"><i class="fas fa-sms"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=4.13.0"></script><script src="/js/main.js?v=4.13.0"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.umd.min.js"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/pangu@4.0.7/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.autoSpacingPage()
+      })
+  }
+}
+
+function panguInit () {
+  if (true){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><div class="js-pjax"></div><script defer="defer" id="ribbon" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/dist/canvas-ribbon.min.js" size="150" alpha="0.6" zIndex="-1" mobile="false" data-click="false"></script><script defer="defer" id="fluttering_ribbon" mobile="true" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/dist/canvas-fluttering-ribbon.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div class="docsearch-wrap"><div id="docsearch" style="display:none"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3.5.2/dist/style.min.css"/><script src="https://cdn.jsdelivr.net/npm/@docsearch/js@3.5.2/dist/umd/index.min.js"></script><script>(() => {
+  docsearch(Object.assign({
+    appId: 'VZ4QTD5D9F',
+    apiKey: '2f3da2750be0865bc553ee8c412e7831',
+    indexName: 'ethan_tsui@foxmail.com',
+    container: '#docsearch',
+  }, null))
+
+  const handleClick = () => {
+    document.querySelector('.DocSearch-Button').click()
+  }
+
+  const searchClickFn = () => {
+    btf.addEventListenerPjax(document.querySelector('#search-button > .search'), 'click', handleClick)
+  }
+
+  searchClickFn()
+  window.addEventListener('pjax:complete', searchClickFn)
+})()</script></div></div></body></html>
