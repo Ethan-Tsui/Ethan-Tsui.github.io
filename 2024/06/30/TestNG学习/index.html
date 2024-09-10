@@ -1,0 +1,725 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>TestNG学习 | Ethan's Knowledge Hut</title><meta name="author" content="Ethan"><meta name="copyright" content="Ethan"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="ffffff"><meta name="description" content="TestNG 使用流程1、在 pom. xml 文件中添加如下依赖： 123456789101112131415161718&lt;?xml version&#x3D;&quot;1.0&quot; encoding&#x3D;&quot;UTF-8&quot;?&gt;&lt;project xmlns&#x3D;&quot;http:&#x2F;&#x2F;maven.apache.org&#x2F;POM&#x2F;4.0.0&quot;         xm">
+<meta property="og:type" content="article">
+<meta property="og:title" content="TestNG学习">
+<meta property="og:url" content="http://example.com/2024/06/30/TestNG%E5%AD%A6%E4%B9%A0/index.html">
+<meta property="og:site_name" content="Ethan&#39;s Knowledge Hut">
+<meta property="og:description" content="TestNG 使用流程1、在 pom. xml 文件中添加如下依赖： 123456789101112131415161718&lt;?xml version&#x3D;&quot;1.0&quot; encoding&#x3D;&quot;UTF-8&quot;?&gt;&lt;project xmlns&#x3D;&quot;http:&#x2F;&#x2F;maven.apache.org&#x2F;POM&#x2F;4.0.0&quot;         xm">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://picture-picture.oss-cn-beijing.aliyuncs.com/wallhaven-exrqrr.jpg">
+<meta property="article:published_time" content="2024-06-30T11:51:44.000Z">
+<meta property="article:modified_time" content="2024-09-10T01:54:32.078Z">
+<meta property="article:author" content="Ethan">
+<meta property="article:tag" content="个人博客">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://picture-picture.oss-cn-beijing.aliyuncs.com/wallhaven-exrqrr.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2024/06/30/TestNG%E5%AD%A6%E4%B9%A0/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//hm.baidu.com"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=4.13.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?73c32659cf386aa28a615345d8d0b897";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.11.1/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'TestNG学习',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-09-10 09:54:32'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', 'ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 7.1.1"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><script>(()=>{
+  const $loadingBox = document.getElementById('loading-box')
+  const $body = document.body
+  const preloader = {
+    endLoading: () => {
+      $body.style.overflow = ''
+      $loadingBox.classList.add('loaded')
+    },
+    initLoading: () => {
+      $body.style.overflow = 'hidden'
+      $loadingBox.classList.remove('loaded')
+    }
+  }
+
+  preloader.initLoading()
+  window.addEventListener('load',() => { preloader.endLoading() })
+
+  if (false) {
+    document.addEventListener('pjax:send', () => { preloader.initLoading() })
+    document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+  }
+})()</script><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://myth-picture.oss-cn-beijing.aliyuncs.com/b_c5889573e79ba39f657f4ad01e0af210.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">19</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">8</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://picture-picture.oss-cn-beijing.aliyuncs.com/wallhaven-exrqrr.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="Ethan's Knowledge Hut"><span class="site-name">Ethan's Knowledge Hut</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">TestNG学习</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-06-30T11:51:44.000Z" title="发表于 2024-06-30 19:51:44">2024-06-30</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-09-10T01:54:32.078Z" title="更新于 2024-09-10 09:54:32">2024-09-10</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%B5%8B%E8%AF%95%E5%BC%80%E5%8F%91/">测试开发</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">7.5k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>32分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="TestNG学习"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="TestNG-使用流程"><a href="#TestNG-使用流程" class="headerlink" title="TestNG 使用流程"></a>TestNG 使用流程</h1><p>1、在 pom. xml 文件中添加如下依赖：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=<span class="string">&quot;1.0&quot;</span> encoding=<span class="string">&quot;UTF-8&quot;</span>?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">project</span> <span class="attr">xmlns</span>=<span class="string">&quot;http://maven.apache.org/POM/4.0.0&quot;</span></span></span><br><span class="line"><span class="tag">         <span class="attr">xmlns:xsi</span>=<span class="string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span></span></span><br><span class="line"><span class="tag">         <span class="attr">xsi:schemaLocation</span>=<span class="string">&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">modelVersion</span>&gt;</span>4.0.0<span class="tag">&lt;/<span class="name">modelVersion</span>&gt;</span></span><br><span class="line"> </span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.example<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>MavenTest<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.0-SNAPSHOT<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"> </span><br><span class="line">    <span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.testng<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>testng<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>6.10<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">project</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>2、新创建 Maven 项目，并在该项目中穿件 HelloWorld 文件</p>
+<figure class="highlight java"><figcaption><span>file:HelloWorld.java</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">HelloWorld</span> &#123;  </span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">hello</span><span class="params">()</span> &#123;  </span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;hello world&quot;</span>;  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后 alt+enter 选中类名即可快速生成 TestNG 测试类</p>
+<figure class="highlight java"><figcaption><span>file:HelloWorldTest</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">HelloWorldTest</span> <span class="keyword">extends</span> <span class="title class_">TestCase</span> &#123;  </span><br><span class="line">  </span><br><span class="line">    <span class="meta">@Test(enabled = false)</span>  </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">testHello1</span><span class="params">()</span> &#123;  </span><br><span class="line">        <span class="type">HelloWorld</span> <span class="variable">hello</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">HelloWorld</span>();  </span><br><span class="line">        <span class="type">String</span> <span class="variable">helloWorld</span> <span class="operator">=</span> hello.hello();  </span><br><span class="line">        <span class="comment">// 检查返回结果  </span></span><br><span class="line">        Assert.assertNotNull(helloWorld);  </span><br><span class="line">    &#125;  </span><br><span class="line">  </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">testHello2</span><span class="params">()</span> &#123;  </span><br><span class="line">        <span class="type">HelloWorld</span> <span class="variable">hello</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">HelloWorld</span>();  </span><br><span class="line">        <span class="type">String</span> <span class="variable">helloWorld</span> <span class="operator">=</span> hello.hello();  </span><br><span class="line">        System.out.println(helloWorld);  </span><br><span class="line">        <span class="comment">// 检查返回结果  </span></span><br><span class="line">        Assert.assertEquals(helloWorld, <span class="string">&quot;hello world&quot;</span>);  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>3、执行后的效果</p>
+<p><img src="https://picture-picture.oss-cn-beijing.aliyuncs.com/img/20240813232507.png" alt="image.png"></p>
+<h1 id="TestNG-常用注解"><a href="#TestNG-常用注解" class="headerlink" title="TestNG 常用注解"></a>TestNG 常用注解</h1><p>TestNG 注解执行顺序如下：@BeforeSuite &gt; @BeforeTest &gt; @BeforeMethod &gt; @Test &gt; @AfterMethod &gt; @AfterTest &gt; @AfterSuite</p>
+<table>
+<thead>
+<tr>
+<th>注解</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>@BeforeSuite</td>
+<td>在该套件的所有测试都运行在注释的方法之前，仅运行一次（套件测试是一起运行的多个测试类）</td>
+</tr>
+<tr>
+<td>@AfterSuite</td>
+<td>在该套件的所有测试都运行在注释方法之后，仅运行一次</td>
+</tr>
+<tr>
+<td>@BeforeClass</td>
+<td>在调用当前类的第一个测试方法之前运行，注释方法仅运行一次</td>
+</tr>
+<tr>
+<td>@AfterClass</td>
+<td>在调用当前类的第一个测试方法之后运行，注释方法仅运行一次</td>
+</tr>
+<tr>
+<td>@BeforeTest</td>
+<td>注释的方法将在属于标签内的类的所有测试方法运行之前运行</td>
+</tr>
+<tr>
+<td>@AfterTest</td>
+<td>注释的方法将在属于标签内的类的所有测试方法运行之后运行</td>
+</tr>
+<tr>
+<td>@BeforeGroups</td>
+<td>配置方法将在之前运行组列表。此方法保证在调用属于这些组中的任何一个的第一个测试方法之前不久运行</td>
+</tr>
+<tr>
+<td>@AfterGroups</td>
+<td>配置方法将在之后运行组列表。该方法保证在调用属于任何这些组的最后一个测试方法之后不久运行</td>
+</tr>
+<tr>
+<td>@BeforeMethod</td>
+<td>注释方法将在每个测试方法之前运行</td>
+</tr>
+<tr>
+<td>@AfterMethod</td>
+<td>注释方法将在每个测试方法之后运行</td>
+</tr>
+<tr>
+<td>@Parameters</td>
+<td>描述如何将参数传递给@Test 方法</td>
+</tr>
+<tr>
+<td>@DataProvider</td>
+<td>标记一种方法来提供测试方法的数据。注释方法必须返回一个 Object[][]，其中每个 Object[] 可以被分配给测试方法的参数列表。要从该 DataProvider 接收数据的@Test 方法需要使用与此注释名称相等的 dataProvider 名称</td>
+</tr>
+<tr>
+<td>@Factory</td>
+<td>将一个方法标记为工厂，返回 TestNG 将被用作测试类的对象。该方法必须返回 Object[]</td>
+</tr>
+<tr>
+<td>@Listeners</td>
+<td>定义测试类上的侦听器</td>
+</tr>
+<tr>
+<td>@Test</td>
+<td>将类或方法标记为测试的一部分</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>[!example] </p>
+</blockquote>
+<p>1、增加一个测试类 TestConfig</p>
+<figure class="highlight java"><figcaption><span>file:TestConfig.java</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">TestConfig</span> &#123;  </span><br><span class="line">    <span class="meta">@BeforeSuite</span>  </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">beforeSuite</span><span class="params">()</span>&#123;  </span><br><span class="line">        System.out.println(<span class="string">&quot;测试套件（当前xml中&lt;suite&gt;标签）之前运行@BeforeSuite------&quot;</span>);  </span><br><span class="line">    &#125;  </span><br><span class="line">  </span><br><span class="line">    <span class="meta">@AfterSuite</span>  </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">afterSuite</span><span class="params">()</span>&#123;  </span><br><span class="line">        System.out.println(<span class="string">&quot;测试套（当前xml中&lt;suite&gt;标签）之后运行@AfterSuite-------&quot;</span>);  </span><br><span class="line">    &#125;  </span><br><span class="line">  </span><br><span class="line">    <span class="meta">@BeforeTest</span>  </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">beforeTest</span><span class="params">()</span>&#123;  </span><br><span class="line">        System.out.println(<span class="string">&quot;测试用例（当前xml中&lt;test&gt;标签）之前运行@BeforeTest&quot;</span>);  </span><br><span class="line">    &#125;  </span><br><span class="line">  </span><br><span class="line">    <span class="meta">@AfterTest</span>  </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">afterTest</span><span class="params">()</span>&#123;  </span><br><span class="line">        System.out.println(<span class="string">&quot;测试用例（当前xml中&lt;test&gt;标签）之后运行@AfterTest--------&quot;</span>);  </span><br><span class="line">    &#125;  </span><br><span class="line">  </span><br><span class="line">    <span class="meta">@BeforeMethod</span>  </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">beforeMethod</span><span class="params">()</span>&#123;  </span><br><span class="line">        System.out.println(<span class="string">&quot;当前类每个测试方法（@Test）之前运行@BeforeMethod&quot;</span>);  </span><br><span class="line">    &#125;  </span><br><span class="line">  </span><br><span class="line">    <span class="meta">@AfterMethod</span>  </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">afterMethod</span><span class="params">()</span>&#123;  </span><br><span class="line">        System.out.println(<span class="string">&quot;当前类每个测试方法（@Test）之后运行@AfterMethod&quot;</span>);  </span><br><span class="line">    &#125;  </span><br><span class="line">  </span><br><span class="line">    <span class="meta">@BeforeGroups(value=&quot;group1&quot;)</span>  </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">beforeGroups</span><span class="params">()</span>&#123;  </span><br><span class="line">        System.out.println(<span class="string">&quot;配置组配group1之前运行@BeforeGroups..........&quot;</span>);  </span><br><span class="line">    &#125;  </span><br><span class="line">  </span><br><span class="line">    <span class="meta">@AfterGroups(value=&quot;group1&quot;)</span>  </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">afterGroups</span><span class="params">()</span>&#123;  </span><br><span class="line">        System.out.println(<span class="string">&quot;配置组配group1之前运行@AfterGroups.......&quot;</span>);  </span><br><span class="line">    &#125;  </span><br><span class="line">  </span><br><span class="line">    <span class="meta">@Test</span>  </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">test1</span><span class="params">()</span>&#123;  </span><br><span class="line">        System.out.println(<span class="string">&quot;running TestConfig.test1()&quot;</span>);  </span><br><span class="line">    &#125;  </span><br><span class="line">  </span><br><span class="line">    <span class="meta">@Test</span>  </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">test2</span><span class="params">()</span>&#123;  </span><br><span class="line">        System.out.println(<span class="string">&quot;running TestConfig.test2()&quot;</span>);  </span><br><span class="line">    &#125;  </span><br><span class="line">  </span><br><span class="line">    <span class="meta">@Test(groups = &quot;group1&quot;)</span>  </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">test3</span><span class="params">()</span>&#123;  </span><br><span class="line">        System.out.println(<span class="string">&quot;running TestConfig.test3()&quot;</span>);  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>2、使用插件 “Create TestNG XML” 可以快速生成 xml 文件来运行项目</p>
+<p>3、在 testng.xml 文件中，通过 XML 标签的嵌套结构，可以定义和管理测试套件、测试组和测试类</p>
+<figure class="highlight xml"><figcaption><span>file:testng.xml</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=<span class="string">&quot;1.0&quot;</span> encoding=<span class="string">&quot;UTF-8&quot;</span>?&gt;</span>  </span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">suite</span> <span class="keyword">SYSTEM</span> <span class="string">&quot;http://testng.org/testng-1.0.dtd&quot;</span>&gt;</span>  </span><br><span class="line"><span class="comment">&lt;!--  </span></span><br><span class="line"><span class="comment">    @BeforeSuite: 在整个套件中的所有测试之前运行  </span></span><br><span class="line"><span class="comment">    @AfterSuite: 在整个套件中的所有测试之后运行  </span></span><br><span class="line"><span class="comment">--&gt;</span>  </span><br><span class="line"><span class="tag">&lt;<span class="name">suite</span> <span class="attr">name</span>=<span class="string">&quot;All Test Suite&quot;</span>&gt;</span>  </span><br><span class="line">    <span class="comment">&lt;!-- @BeforeTest: 在每个 &lt;test&gt; 元素中的所有类的测试方法之前运行 --&gt;</span>  </span><br><span class="line">    <span class="tag">&lt;<span class="name">test</span> <span class="attr">name</span>=<span class="string">&quot;case1&quot;</span>&gt;</span>  </span><br><span class="line">        <span class="tag">&lt;<span class="name">classes</span>&gt;</span>  </span><br><span class="line">            <span class="comment">&lt;!-- TestConfig 类的测试方法会首先执行 --&gt;</span>  </span><br><span class="line">            <span class="tag">&lt;<span class="name">class</span> <span class="attr">name</span>=<span class="string">&quot;com.myth.testcase.TestConfig&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">class</span>&gt;</span>  </span><br><span class="line">            <span class="comment">&lt;!-- HelloWorldTest 类的测试方法会在 TestConfig 类之后执行 --&gt;</span>  </span><br><span class="line">            <span class="tag">&lt;<span class="name">class</span> <span class="attr">name</span>=<span class="string">&quot;com.myth.testcase.HelloWorldTest&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">class</span>&gt;</span>  </span><br><span class="line">        <span class="tag">&lt;/<span class="name">classes</span>&gt;</span>  </span><br><span class="line">    <span class="tag">&lt;/<span class="name">test</span>&gt;</span>  </span><br><span class="line">    <span class="comment">&lt;!-- @AfterTest: 在每个 &lt;test&gt; 元素中的所有类的测试方法之后运行 --&gt;</span>  </span><br><span class="line">  </span><br><span class="line">    <span class="comment">&lt;!-- @BeforeTest: 在每个 &lt;test&gt; 元素中的所有类的测试方法之前运行 --&gt;</span>  </span><br><span class="line">    <span class="tag">&lt;<span class="name">test</span> <span class="attr">name</span>=<span class="string">&quot;case2&quot;</span>&gt;</span>  </span><br><span class="line">        <span class="tag">&lt;<span class="name">classes</span>&gt;</span>  </span><br><span class="line">            <span class="comment">&lt;!-- TestConfig 类的测试方法会在 case2 中执行 --&gt;</span>  </span><br><span class="line">            <span class="tag">&lt;<span class="name">class</span> <span class="attr">name</span>=<span class="string">&quot;com.myth.testcase.TestConfig&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">class</span>&gt;</span>  </span><br><span class="line">        <span class="tag">&lt;/<span class="name">classes</span>&gt;</span>  </span><br><span class="line">    <span class="tag">&lt;/<span class="name">test</span>&gt;</span>  </span><br><span class="line">    <span class="comment">&lt;!-- @AfterTest: 在每个 &lt;test&gt; 元素中的所有类的测试方法之后运行 --&gt;</span>  </span><br><span class="line"><span class="tag">&lt;/<span class="name">suite</span>&gt;</span>  </span><br><span class="line">        <span class="comment">&lt;!-- @AfterSuite: 在整个套件中的所有测试之后运行 --&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="TestNG-XML-标签"><a href="#TestNG-XML-标签" class="headerlink" title="TestNG XML 标签"></a>TestNG XML 标签</h1><table>
+<thead>
+<tr>
+<th>标签</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>&lt;suite&gt;</td>
+<td>套件，根标签，通常由几个 &lt;test&gt; 组成</td>
+</tr>
+<tr>
+<td>&lt;test&gt;</td>
+<td>测试用例，name 为必须属性</td>
+</tr>
+<tr>
+<td>&lt;classes&gt;</td>
+<td>用例中包含的<strong>类</strong>，字标签为&lt;class name&#x3D;”className”&gt;</td>
+</tr>
+<tr>
+<td>&lt;class&gt;</td>
+<td>测试类，name 为必须属性</td>
+</tr>
+<tr>
+<td>&lt;packages&gt;</td>
+<td>用例中包含的包，包中所有的方法都会被执行，字标签为&lt;package name&#x3D;”packageName”&gt;</td>
+</tr>
+<tr>
+<td>&lt;package&gt;</td>
+<td>测试包，name 为必须属性</td>
+</tr>
+<tr>
+<td>&lt;methods&gt;</td>
+<td>指定测试类中包含或排除的方法，字类为&lt;include&gt;，&lt;exclude&gt;</td>
+</tr>
+<tr>
+<td>&lt;include&gt;</td>
+<td>指定需要测试的方法</td>
+</tr>
+<tr>
+<td>&lt;exclude&gt;</td>
+<td>指定不需要测试的方法</td>
+</tr>
+<tr>
+<td>&lt;groups&gt;</td>
+<td>指定测试用例中要运行或者排除运行的分组，子标签为&lt;run&gt;，&gt;，&lt;run&gt; 下包含 &lt;include&gt;，&lt;exclude&gt;标签，&lt;include&gt;，&lt;exclude&gt;的 name 指定运行、不运行的分组</td>
+</tr>
+</tbody></table>
+<figure class="highlight xml"><figcaption><span>file:tesng1.xml</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=<span class="string">&quot;1.0&quot;</span> encoding=<span class="string">&quot;UTF-8&quot;</span>?&gt;</span>  </span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">suite</span> <span class="keyword">SYSTEM</span> <span class="string">&quot;http://testng.org/testng-1.0.dtd&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">suite</span> <span class="attr">name</span>=<span class="string">&quot;tester&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">test</span> <span class="attr">name</span>=<span class="string">&quot;case1&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">classes</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">class</span> <span class="attr">name</span>=<span class="string">&quot;org.ant.test.testcase.TestHelloWorld&quot;</span>/&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">class</span> <span class="attr">name</span>=<span class="string">&quot;org.ant.test.testcase.TestConfig&quot;</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">methods</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">include</span> <span class="attr">name</span>=<span class="string">&quot;test1&quot;</span> /&gt;</span>   <span class="comment">&lt;!-- 运行test1()方法--&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">exclude</span> <span class="attr">name</span>=<span class="string">&quot;test2&quot;</span> /&gt;</span>   <span class="comment">&lt;!-- 不运行test2()方法--&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">methods</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">class</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">classes</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">test</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">test</span> <span class="attr">name</span>=<span class="string">&quot;case2&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">packages</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">package</span> <span class="attr">name</span>=<span class="string">&quot;org.ant.test.testcase&quot;</span> /&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">packages</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groups</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">run</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">exclude</span> <span class="attr">name</span>=<span class="string">&quot;group1&quot;</span> /&gt;</span>   <span class="comment">&lt;!-- 不运行组group1的所有方法，或者也可include标签来表示需要行的组--&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">run</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">groups</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">test</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">suite</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="suite-标签"><a href="#suite-标签" class="headerlink" title="suite 标签"></a>suite 标签</h2><p>TestNG.xml 文件的最外层标签即 suite，即<strong>测试套件</strong>，其下可以有多个 &lt;test&gt; 和 &lt;groups&gt;，可以添加的属性如下：</p>
+<p>1、<strong>name</strong> 属性：必要属性，值可以自己设定，此名字会在 testNG 的报告中看到</p>
+<p>2、<strong>verbose</strong> 属性：指定 TestNG 报告的详细程度，从 0 到 10，其中 10 最为详细；默认生成的 xml 次属性值为 1</p>
+<p>3、<strong>parallel</strong> 属性：指代运行方式，默认为none，即<strong>串行</strong>运行方式；<strong>并行</strong>执行方法包括如下几种：</p>
+<ul>
+<li>methods：方法层级，若为此值，则该suite下所有的测试方法都将进行多线程，即测试用例级别的多线程。如果用例之间有依赖，则执行顺序会按照设定的依赖来运行；</li>
+<li>tests：TestNG将在同一线程中运行相同的 &lt;Test&gt; 标签中的所有方法，每个 &lt;test&gt;标签都将处于一个单独的线程中，这允许您将不是线程安全的所有类分组在同一个 &lt;test&gt; 中，并保证它们都将在同一个线程中运行，同时利用TestNG使用尽可能多的线程运行测试</li>
+<li>classes：类级别并发，即 TestNG 会将该 suite 下每个 class 都将在单独的线程中运行，同一个 class 下的所有用例都将在同一个线程中运行；</li>
+<li>instances：实例级别，即 TestNG 将在同一线程中运行同一实例中的所有方法，两个不同实例上的两个方法将在不同的线程中运行</li>
+</ul>
+<p>4、<strong>thread-count</strong> 属性：指定线程数，按照需要输入，需要parallel参数非none时才可以添加</p>
+<p>5、<strong>annotations</strong> 属性：为注解的级别，为methods级别和class级别，一般不用设置</p>
+<p>6、<strong>time-out</strong> 属性：指定超时时间，该suite下所有的用例的超时时间</p>
+<p>7、<strong>group-by-instances</strong> 属性：用于那些有依赖的方法，且被依赖的对象有多个重载对象，因为如果是依赖方法，且该方法有多个重载方法，则默认是会将所有重载方法都跑完再运行被依赖方法，但有时候我们不想这样，则将此项设置为true即可</p>
+<p>8、<strong>preserve-order</strong> 属性：值可输入true或者false，如果为true，则用例执行会按照在xml中的顺序执行，否则会乱序执行，不添加此属性的话默认是按顺序执行的</p>
+<h2 id="test-标签"><a href="#test-标签" class="headerlink" title="test 标签"></a>test 标签</h2><p>此标签无特别意义，其下可以包括多个标签，如groups、classes等，如下介绍下几种书写方式：</p>
+<p>1、选择一个包中的全部测试脚本（包含子包）</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">test</span> <span class="attr">name</span> = <span class="string">&quot;allTestsInAPackage&quot;</span> &gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">packages</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">package</span> <span class="attr">name</span> = <span class="string">&quot;whole.path.to.package.* /&gt;</span></span></span><br><span class="line"><span class="string"><span class="tag">   &lt;/packages&gt;</span></span></span><br><span class="line"><span class="string"><span class="tag">&lt;/test&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+<p>2、选择一个类中的全部测试脚本</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">test</span> <span class="attr">name</span> = <span class="string">&quot;allTestsInAPackage&quot;</span> &gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">packages</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">package</span> <span class="attr">name</span> = <span class="string">&quot;whole.path.to.package.* /&gt;</span></span></span><br><span class="line"><span class="string"><span class="tag">   &lt;/packages&gt;</span></span></span><br><span class="line"><span class="string"><span class="tag">&lt;/test&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+<p>3、选择一个类中的部分测试脚本</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">test</span> <span class="attr">name</span> = <span class="string">&quot;aFewTestsFromAClass&quot;</span> &gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">classes</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">class</span> <span class="attr">name</span>=<span class="string">&quot;whole.path.to.package.className &gt;</span></span></span><br><span class="line"><span class="string"><span class="tag">      &lt;methods&gt;</span></span></span><br><span class="line"><span class="string"><span class="tag">         &lt;include name = &quot;</span><span class="attr">firstMethod</span>&quot; /&gt;</span></span><br><span class="line">         <span class="tag">&lt;<span class="name">include</span> <span class="attr">name</span> = <span class="string">&quot;secondMethod&quot;</span> /&gt;</span></span><br><span class="line">         <span class="tag">&lt;<span class="name">include</span> <span class="attr">name</span> = <span class="string">&quot;thirdMethod&quot;</span> /&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">methods</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">class</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="name">classes</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">test</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>4、选择一个包中的某些组</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">test</span> <span class="attr">name</span> = <span class="string">&quot;includedGroupsInAPackage&quot;</span> &gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">groups</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">run</span>&gt;</span></span><br><span class="line">         <span class="tag">&lt;<span class="name">include</span> <span class="attr">name</span> = <span class="string">&quot;includedGroup&quot;</span> /&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">run</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="name">groups</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">packages</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">package</span> <span class="attr">name</span> = <span class="string">&quot;whole.path.to.package.* /&gt;</span></span></span><br><span class="line"><span class="string"><span class="tag">   &lt;/packages&gt;</span></span></span><br><span class="line"><span class="string"><span class="tag">&lt;/test&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+<p>5、排除一个保中的某些组</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">test</span> <span class="attr">name</span> = <span class="string">&quot;excludedGroupsInAPackage&quot;</span> &gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">groups</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">run</span>&gt;</span></span><br><span class="line">         <span class="tag">&lt;<span class="name">exclude</span> <span class="attr">name</span> = <span class="string">&quot;excludedGroup&quot;</span> /&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">run</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="name">groups</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">packages</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">package</span> <span class="attr">name</span> = <span class="string">&quot;whole.path.to.package.* /&gt;</span></span></span><br><span class="line"><span class="string"><span class="tag">   &lt;/packages&gt;</span></span></span><br><span class="line"><span class="string"><span class="tag">&lt;/test&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+<p>test 标签可以附带的属性有如下几种，下面对各个属性做单独说明：</p>
+<p>1、name 属性：必须值，值可以自行设定，此名字只会在 TestNG 报告中展示</p>
+<p>2、verbose 属性：指定testNG报告的详细程度，从0开始到10，其中10为最详细，默认生成的xml此属性值为1</p>
+<p>3、threadPoolSize 属性：指定此test的线程池大小，为数字</p>
+<p>4、invocationCount 属性：指定此test的运行次数，为数字，范例如上面的代码所示</p>
+<p>5、<strong>time-out</strong>：指定此test的运行次数，为数字，范例如上面的代码所示</p>
+<h2 id="group-标签"><a href="#group-标签" class="headerlink" title="group 标签"></a>group 标签</h2><p>此标签必然是在 &lt;test&gt; 标签下的，用于标识那些组会被用于测试或者被排除在测试之外，其同级必然要包含一个 &lt;classes&gt; 标签或者 &lt;pakages&gt; 标签，用于指定groups来自于哪些包或者类</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">test</span> <span class="attr">name</span>=<span class="string">&quot;Regression1&quot;</span>&gt;</span>  </span><br><span class="line">    <span class="tag">&lt;<span class="name">groups</span>&gt;</span>  </span><br><span class="line">        <span class="tag">&lt;<span class="name">define</span> <span class="attr">name</span>=<span class="string">&quot;functest&quot;</span>&gt;</span>  </span><br><span class="line">            <span class="tag">&lt;<span class="name">include</span> <span class="attr">name</span>=<span class="string">&quot;windows&quot;</span>/&gt;</span>  </span><br><span class="line">            <span class="tag">&lt;<span class="name">include</span> <span class="attr">name</span>=<span class="string">&quot;linux&quot;</span>/&gt;</span>  </span><br><span class="line">        <span class="tag">&lt;/<span class="name">define</span>&gt;</span>  </span><br><span class="line">        <span class="tag">&lt;<span class="name">define</span> <span class="attr">name</span>=<span class="string">&quot;all&quot;</span>&gt;</span>  </span><br><span class="line">            <span class="tag">&lt;<span class="name">include</span> <span class="attr">name</span>=<span class="string">&quot;functest&quot;</span>/&gt;</span>  </span><br><span class="line">            <span class="tag">&lt;<span class="name">include</span> <span class="attr">name</span>=<span class="string">&quot;checkintest&quot;</span>/&gt;</span>  </span><br><span class="line">        <span class="tag">&lt;/<span class="name">define</span>&gt;</span>  </span><br><span class="line">        <span class="tag">&lt;<span class="name">run</span>&gt;</span>  </span><br><span class="line">            <span class="tag">&lt;<span class="name">include</span> <span class="attr">name</span>=<span class="string">&quot;all&quot;</span>/&gt;</span>  </span><br><span class="line">        <span class="tag">&lt;/<span class="name">run</span>&gt;</span>  </span><br><span class="line">    <span class="tag">&lt;/<span class="name">groups</span>&gt;</span>  </span><br><span class="line">    <span class="tag">&lt;<span class="name">classes</span>&gt;</span>  </span><br><span class="line">        <span class="tag">&lt;<span class="name">class</span> <span class="attr">name</span>=<span class="string">&quot;test.sample.Test1&quot;</span>/&gt;</span>  </span><br><span class="line">    <span class="tag">&lt;/<span class="name">classes</span>&gt;</span>  </span><br><span class="line"><span class="tag">&lt;/<span class="name">test</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="其他标签"><a href="#其他标签" class="headerlink" title="其他标签"></a>其他标签</h2><p>1、选择一个包</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">packages</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">package</span> <span class="attr">name</span> = <span class="string">&quot;packageName&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">packages</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>2、选择一个类</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">classes</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">class</span> <span class="attr">name</span> = <span class="string">&quot;className&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">classes</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>3、选择一个方法</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">classes</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">class</span> <span class="attr">name</span> = <span class="string">&quot;className&quot;</span> /&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">methods</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">include</span> <span class="attr">name</span> = <span class="string">&quot;methodName&quot;</span> /&gt;</span></span><br><span class="line">       <span class="tag">&lt;/<span class="name">methods</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">class</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">classes</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="TestNG-常用断言"><a href="#TestNG-常用断言" class="headerlink" title="TestNG 常用断言"></a>TestNG 常用断言</h1><p>1、<code>assertEquals()</code>：检查两个值是否相等</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.testng.Assert;</span><br><span class="line"><span class="keyword">import</span> org.testng.annotations.Test;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ExampleTest</span> &#123;</span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">testAssertEquals</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">expected</span> <span class="operator">=</span> <span class="number">5</span>;</span><br><span class="line">        <span class="type">int</span> <span class="variable">actual</span> <span class="operator">=</span> <span class="number">2</span> + <span class="number">3</span>;</span><br><span class="line">        Assert.assertEquals(actual, expected, <span class="string">&quot;实际值与期望值不相等&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>2、<code>assertNotEquals()</code>：检查两个值是否不相等</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">testAssertNotEquals</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">int</span> <span class="variable">unexpected</span> <span class="operator">=</span> <span class="number">5</span>;</span><br><span class="line">    <span class="type">int</span> <span class="variable">actual</span> <span class="operator">=</span> <span class="number">2</span> + <span class="number">3</span>;</span><br><span class="line">    Assert.assertNotEquals(actual, unexpected, <span class="string">&quot;实际值与不期望值相等&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>3、<code>assertTrue()</code>：检查条件是否为真</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">testAssertTrue</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">boolean</span> <span class="variable">condition</span> <span class="operator">=</span> (<span class="number">5</span> &gt; <span class="number">2</span>);</span><br><span class="line">    Assert.assertTrue(condition, <span class="string">&quot;条件应该为真&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>4、<code>assertFalse()</code>：检查条件是否为假</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">testAssertFalse</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">boolean</span> <span class="variable">condition</span> <span class="operator">=</span> (<span class="number">5</span> &lt; <span class="number">2</span>);</span><br><span class="line">    Assert.assertFalse(condition, <span class="string">&quot;条件应该为假&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>5、<code>assertNull()</code>：检查对象是否为 null</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">testAssertNull</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">String</span> <span class="variable">str</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">    Assert.assertNull(str, <span class="string">&quot;对象不应该是 null&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>6、<code>assertNotNull()</code>：检查对象是否不为 null</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">testAssertNotNull</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">String</span> <span class="variable">str</span> <span class="operator">=</span> <span class="string">&quot;Hello, TestNG!&quot;</span>;</span><br><span class="line">    Assert.assertNotNull(str, <span class="string">&quot;对象应该不为 null&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>7、<code>assertSame()</code>：检查两个引用是否指向同一个对象</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">testAssertSame</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">String</span> <span class="variable">str1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">String</span>(<span class="string">&quot;TestNG&quot;</span>);</span><br><span class="line">    <span class="type">String</span> <span class="variable">str2</span> <span class="operator">=</span> str1;</span><br><span class="line">    Assert.assertSame(str1, str2, <span class="string">&quot;两个引用不指向同一个对象&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>8、<code>assertNotSame()</code>：检查两个引用是否指向不同的对象</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">testAssertNotSame</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">String</span> <span class="variable">str1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">String</span>(<span class="string">&quot;TestNG&quot;</span>);</span><br><span class="line">    <span class="type">String</span> <span class="variable">str2</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">String</span>(<span class="string">&quot;TestNG&quot;</span>);</span><br><span class="line">    Assert.assertNotSame(str1, str2, <span class="string">&quot;两个引用应该指向不同的对象&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>9、<code>assertArrayEquals()</code>：检查两个数组是否相等（包括长度和元素）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ExampleTest</span> &#123;</span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">testAssertArrayEquals</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="type">int</span>[] expected = &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>&#125;;</span><br><span class="line">        <span class="type">int</span>[] actual = &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>&#125;;</span><br><span class="line">        </span><br><span class="line">        Assert.assertEquals(actual, expected, <span class="string">&quot;数组不相等&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">testAssertArrayEquals_Failure</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="type">int</span>[] expected = &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>&#125;;</span><br><span class="line">        <span class="type">int</span>[] actual = &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">4</span>&#125;; <span class="comment">// 这里将导致断言失败</span></span><br><span class="line">        </span><br><span class="line">        Assert.assertEquals(actual, expected, <span class="string">&quot;数组不相等，测试失败&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="TestNG-参数传递"><a href="#TestNG-参数传递" class="headerlink" title="TestNG 参数传递"></a>TestNG 参数传递</h1><h2 id="Parameters"><a href="#Parameters" class="headerlink" title="@Parameters"></a>@Parameters</h2><p>可以使用 @Parameters 注解从测试配置 xml 文件中获取参数</p>
+<p>1、新建测试类 TestParameter</p>
+<figure class="highlight java"><figcaption><span>file:TestParameter.java</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">TestParameter</span> &#123;  </span><br><span class="line">  </span><br><span class="line">    <span class="meta">@Test</span>  </span><br><span class="line">    <span class="meta">@Parameters(&#123;&quot;param&quot;, &quot;param2&quot;&#125;)</span>  </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">printParameter</span><span class="params">(String param, String param2)</span> &#123;  </span><br><span class="line">        System.out.println(<span class="string">&quot;param参数值为：&quot;</span> + param);  </span><br><span class="line">        System.out.println(<span class="string">&quot;param2参数值为：&quot;</span> + param2);  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>2、创建 xml 文件，完成参数设置</p>
+<figure class="highlight xml"><figcaption><span>paramterTest.xml</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=<span class="string">&quot;1.0&quot;</span> encoding=<span class="string">&quot;UTF-8&quot;</span>?&gt;</span>  </span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">suite</span> <span class="keyword">SYSTEM</span> <span class="string">&quot;http://testng.org/testng-1.0.dtd&quot;</span>&gt;</span>  </span><br><span class="line"><span class="tag">&lt;<span class="name">suite</span> <span class="attr">name</span>=<span class="string">&quot;parameterTest&quot;</span>&gt;</span>  </span><br><span class="line">    <span class="tag">&lt;<span class="name">test</span> <span class="attr">name</span>=<span class="string">&quot;case1&quot;</span>&gt;</span>  </span><br><span class="line">        <span class="tag">&lt;<span class="name">parameter</span> <span class="attr">name</span>=<span class="string">&quot;param&quot;</span> <span class="attr">value</span>=<span class="string">&quot;param的值&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">parameter</span>&gt;</span>  </span><br><span class="line">        <span class="tag">&lt;<span class="name">parameter</span> <span class="attr">name</span>=<span class="string">&quot;param2&quot;</span> <span class="attr">value</span>=<span class="string">&quot;param2的值&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">parameter</span>&gt;</span>  </span><br><span class="line">        <span class="tag">&lt;<span class="name">classes</span>&gt;</span>  </span><br><span class="line">            <span class="tag">&lt;<span class="name">class</span> <span class="attr">name</span>=<span class="string">&quot;com.myth.testcase.TestParameter&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">class</span>&gt;</span>  </span><br><span class="line">        <span class="tag">&lt;/<span class="name">classes</span>&gt;</span>  </span><br><span class="line">    <span class="tag">&lt;/<span class="name">test</span>&gt;</span>  </span><br><span class="line"><span class="tag">&lt;/<span class="name">suite</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><br>3、通过 xml 配置文件完成该测试方法的运行，结果如下</p>
+<p><img src="https://picture-picture.oss-cn-beijing.aliyuncs.com/img/20240814002418.png" alt="image.png"></p>
+<h2 id="DataProvider"><a href="#DataProvider" class="headerlink" title="@DataProvider"></a>@DataProvider</h2><p>此外，可以使用 @DataProvider 传送参数，@Dataprovider 可以传递一些比较复杂的参数</p>
+<p>1、新建测试类 TestParameter2</p>
+<figure class="highlight java"><figcaption><span>file:TestParameter2.java</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">TestParameter2</span> &#123;  </span><br><span class="line">  </span><br><span class="line">    <span class="meta">@DataProvider(name = &quot;user&quot;)</span>  </span><br><span class="line">    <span class="keyword">public</span> Object[][] Users() &#123;  </span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Object</span>[][]&#123;  </span><br><span class="line">                &#123;<span class="string">&quot;root&quot;</span>, <span class="string">&quot;password&quot;</span>&#125;,  </span><br><span class="line">                &#123;<span class="string">&quot;csdn.com&quot;</span>, <span class="string">&quot;zjkl&quot;</span>&#125;,  </span><br><span class="line">                &#123;<span class="string">&quot;python&quot;</span>, <span class="string">&quot;java&quot;</span>&#125;  </span><br><span class="line">        &#125;;  </span><br><span class="line">    &#125;  </span><br><span class="line">  </span><br><span class="line">    <span class="meta">@Test(dataProvider = &quot;user&quot;)</span>  </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">verifyUser</span><span class="params">(String userName, String password)</span> &#123;  </span><br><span class="line">        System.out.println(<span class="string">&quot;Username:&quot;</span> + userName + <span class="string">&quot;Password:&quot;</span> + password);  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>2、运行之后得到结果</p>
+<p><img src="https://picture-picture.oss-cn-beijing.aliyuncs.com/img/20240814003031.png" alt="image.png"></p>
+<h1 id="TestNG-预期异常测试"><a href="#TestNG-预期异常测试" class="headerlink" title="TestNG 预期异常测试"></a>TestNG 预期异常测试</h1><p>在 TestNG 中，可以使用 <code>@Test</code> 注解的 <code>expectedExceptions</code> 属性来指定预期的异常类型：如果测试方法抛出了指定的异常，测试将被视为通过；否则，测试将失败。</p>
+<p>这种功能主要用于验证代码在异常情况下的行为是否符合预期。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">TestException</span> &#123;  </span><br><span class="line">  </span><br><span class="line">    <span class="meta">@Test(expectedExceptions = ArithmeticException.class)</span>  </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">divisionWithException</span><span class="params">()</span> &#123;  </span><br><span class="line">        <span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">1</span> / <span class="number">0</span>;  </span><br><span class="line">        System.out.println(<span class="string">&quot;After division the value of i is :&quot;</span> + i);  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://picture-picture.oss-cn-beijing.aliyuncs.com/img/20240814003417.png" alt="image.png"></p>
+<h1 id="TestNG-忽略测试"><a href="#TestNG-忽略测试" class="headerlink" title="TestNG 忽略测试"></a>TestNG 忽略测试</h1><p>有时候我们写的用例没准备好，或者该次测试不想运行此用例，那么删掉显然不明智，那么就可以通过注解 <code>@Test(enabled = false)</code> 来将其忽略掉，此用例就不会运行了</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">TestCase1</span> &#123;</span><br><span class="line"> </span><br><span class="line">    <span class="meta">@Test(enabled=false)</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">TestNgLearn1</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;this is TestNG test case1&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">TestNgLearn2</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;this is TestNG test case2&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://picture-picture.oss-cn-beijing.aliyuncs.com/img/20240814003648.png" alt="image.png"></p>
+<h1 id="TestNG-超时测试"><a href="#TestNG-超时测试" class="headerlink" title="TestNG 超时测试"></a>TestNG 超时测试</h1><p>“超时”表示如果单元测试花费的时间超过指定的毫秒数，那么 TestNG 将会中止它并将其标记为失败。</p>
+<p>此项常用于性能测试。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">TestCase1</span> &#123;</span><br><span class="line"> </span><br><span class="line">    <span class="meta">@Test(timeOut = 5000)</span> <span class="comment">// time in mulliseconds</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">testThisShouldPass</span><span class="params">()</span> <span class="keyword">throws</span> InterruptedException &#123;</span><br><span class="line">        Thread.sleep(<span class="number">4000</span>);</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="meta">@Test(timeOut = 1000)</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">testThisShouldFail</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">while</span> (<span class="literal">true</span>)&#123;</span><br><span class="line">            <span class="comment">// do nothing</span></span><br><span class="line">        &#125; </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://picture-picture.oss-cn-beijing.aliyuncs.com/img/20240814004321.png" alt="image.png"></p>
+<h1 id="TestNG-分组测试"><a href="#TestNG-分组测试" class="headerlink" title="TestNG 分组测试"></a>TestNG 分组测试</h1><p>分组测试是指使用 <code>group</code> 属性进行测试分类。如果您使用 XML 配置文件，那么需要在 <code>&lt;groups&gt;</code> 标签中定义分组；如果直接在类中进行分组，则通过 <code>@Test(groups=&quot;group2&quot;)</code> 的方式来实现。</p>
+<p>这种分组可以应用在单个测试方法上，也可以应用在类上。只要具有相同组名的测试方法或类，都会被归类到同一个组中。此外，组名可以指定多个，例如 <code>@Test(groups = &#123;&quot;mysql&quot;, &quot;database&quot;&#125;)</code>。</p>
+<figure class="highlight java"><figcaption><span>file:NewTest.java</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">NewTest</span> &#123;</span><br><span class="line"> </span><br><span class="line">  <span class="meta">@Test(groups=&quot;group1&quot;)</span></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">test1</span><span class="params">()</span> &#123;</span><br><span class="line">	  System.out.println(<span class="string">&quot;test1 from group1&quot;</span>);</span><br><span class="line">	  Assert.assertTrue(<span class="literal">true</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="meta">@Test(groups=&quot;group1&quot;)</span></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">test11</span><span class="params">()</span> &#123;</span><br><span class="line">	  System.out.println(<span class="string">&quot;test11 from group1&quot;</span>);</span><br><span class="line">	  Assert.assertTrue(<span class="literal">true</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="meta">@Test(groups=&quot;group2&quot;)</span></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">test2</span><span class="params">()</span> </span><br><span class="line">  &#123;</span><br><span class="line">	  System.out.println(<span class="string">&quot;test2 from group2&quot;</span>);</span><br><span class="line">	  Assert.assertTrue(<span class="literal">true</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="meta">@BeforeTest</span></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">beforeTest</span><span class="params">()</span> </span><br><span class="line">  &#123;</span><br><span class="line">	  System.out.println(<span class="string">&quot;beforeTest&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="meta">@AfterTest</span></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">afterTest</span><span class="params">()</span> </span><br><span class="line">  &#123;</span><br><span class="line">	  System.out.println(<span class="string">&quot;afterTest&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="meta">@BeforeClass</span></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">beforeClass</span><span class="params">()</span> </span><br><span class="line">  &#123;</span><br><span class="line">	  System.out.println(<span class="string">&quot;beforeClass&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="meta">@AfterClass</span></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">afterClass</span><span class="params">()</span> </span><br><span class="line">  &#123;</span><br><span class="line">	  System.out.println(<span class="string">&quot;afterClass&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="meta">@BeforeSuite</span></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">beforeSuite</span><span class="params">()</span> </span><br><span class="line">  &#123;</span><br><span class="line">	  System.out.println(<span class="string">&quot;beforeSuite&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="meta">@AfterSuite</span></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">afterSuite</span><span class="params">()</span> </span><br><span class="line">  &#123;</span><br><span class="line">	  System.out.println(<span class="string">&quot;afterSuite&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="meta">@BeforeGroups(groups=&quot;group1&quot;)</span></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">beforeGroups</span><span class="params">()</span> </span><br><span class="line">  &#123;</span><br><span class="line">	  System.out.println(<span class="string">&quot;beforeGroups&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="meta">@AfterGroups(groups=&quot;group1&quot;)</span></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">afterGroups</span><span class="params">()</span> </span><br><span class="line">  &#123;</span><br><span class="line">	  System.out.println(<span class="string">&quot;afterGroups&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="meta">@BeforeMethod</span></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">beforeMethod</span><span class="params">()</span> </span><br><span class="line">  &#123;</span><br><span class="line">	  System.out.println(<span class="string">&quot;beforeMethod&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="meta">@AfterMethod</span></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">afterMethod</span><span class="params">()</span> </span><br><span class="line">  &#123;</span><br><span class="line">	  System.out.println(<span class="string">&quot;afterMethod&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><figcaption><span>file:TestCase.java</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test(groups= &quot;group2&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">TestCase1</span> &#123;</span><br><span class="line"> </span><br><span class="line">    <span class="meta">@Test(enabled=false)</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">TestNgLearn1</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;this is TestNG test case1&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">TestNgLearn2</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;this is TestNG test case2&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight xml"><figcaption><span>file:testng.xml</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=<span class="string">&quot;1.0&quot;</span> encoding=<span class="string">&quot;UTF-8&quot;</span>?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">suite</span> <span class="attr">name</span>=<span class="string">&quot;Suite&quot;</span> <span class="attr">parallel</span>=<span class="string">&quot;false&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">test</span> <span class="attr">name</span>=<span class="string">&quot;Test&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groups</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">include</span> <span class="attr">name</span>=<span class="string">&quot;group1&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">incloud</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">include</span> <span class="attr">name</span>=<span class="string">&quot;group2&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">incloud</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">groups</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">classes</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">class</span> <span class="attr">name</span>=<span class="string">&quot;com.demo.test.testng.NewTest&quot;</span>/&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">class</span> <span class="attr">name</span>=<span class="string">&quot;com.demo.test.testng.TestCase1&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">classes</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">test</span>&gt;</span> <span class="comment">&lt;!-- Test --&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">suite</span>&gt;</span> <span class="comment">&lt;!-- Suite --&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="TestNG-分-suite-测试"><a href="#TestNG-分-suite-测试" class="headerlink" title="TestNG 分 suite 测试"></a>TestNG 分 suite 测试</h1><p>测试套件是用于测试软件程序的行为或一组行为的测试用例的集合。在 TestNG 中，我们无法在测试源代码中定义一个套件，但它可以由一个 <strong>XML</strong> 文件表示，因为套件是执行的功能。它还允许灵活配置要运行的测试。套件可以包含一个或多个测试，并由 &lt;suite&gt; 标记定义。&lt;suite&gt; 是 testng. xml 的根标记。它描述了一个测试套件，它又由几个 &lt;test&gt; 部分组成。</p>
+<h1 id="TestNG-依赖测试"><a href="#TestNG-依赖测试" class="headerlink" title="TestNG 依赖测试"></a>TestNG 依赖测试</h1><p>有时，我们可能需要以特定顺序调用测试用例中的方法，或者可能希望在方法之间<strong>共享数据和状态</strong>。 TestNG支持这种依赖关系，因为它支持在测试方法之间显式依赖的声明。</p>
+<ul>
+<li>在 @Test 注释中使用属性 <strong>dependsOnMethods</strong></li>
+<li>在 @Test 注释中使用属性 <strong>dependsOnGroups</strong></li>
+</ul>
+<p>除此之外依赖还分为 hard 依赖和 soft 依赖：</p>
+<ul>
+<li>hard 依赖：默认为此依赖方式，即其所有依赖的 methods 或者 groups 必须全部 pass，否则被标识依赖的类或者方法将会被略过，在报告中标识为 skip，如后面的范例所示，此为默认的依赖方式；</li>
+<li>soft 依赖：此方式下，其依赖的方法或者组有不是全部 pass 也不会影响被标识依赖的类或者方法的运行，注意如果使用此方式，则依赖者和被依赖者之间必须不存在成功失败的因果关系，否则会导致用例失败。此方法在注解中需要加入 alwaysRun&#x3D;true 即可，如 @Test (dependsOnMethods&#x3D; {“TestNgLearn1”}， alwaysRun&#x3D;true)；</li>
+</ul>
+<p>1、被依赖方法 pass</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">TestCase1</span> &#123;</span><br><span class="line"> </span><br><span class="line">    <span class="meta">@Test(enabled=true)</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">TestNgLearn1</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;this is TestNG test case1&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Test(dependsOnMethods= &#123;&quot;TestNgLearn1&quot;&#125;)</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">TestNgLearn2</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;this is TestNG test case2&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>2、被依赖方法 fail</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">TestCase1</span> &#123;</span><br><span class="line"> </span><br><span class="line">    <span class="meta">@Test(enabled=true)</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">TestNgLearn1</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;this is TestNG test case1&quot;</span>);</span><br><span class="line">        Assert.assertFalse(<span class="literal">true</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Test(dependsOnMethods= &#123;&quot;TestNgLearn1&quot;&#125;)</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">TestNgLearn2</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;this is TestNG test case2&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>3、group 依赖</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test(groups = &#123; &quot;init&quot; &#125;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">serverStartedOk</span><span class="params">()</span> &#123;&#125;</span><br><span class="line"> </span><br><span class="line"><span class="meta">@Test(groups = &#123; &quot;init&quot; &#125;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">initEnvironment</span><span class="params">()</span> &#123;&#125;</span><br><span class="line"> </span><br><span class="line"><span class="meta">@Test(dependsOnGroups = &#123; &quot;init.*&quot; &#125;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">method1</span><span class="params">()</span> &#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="TestNG-报告"><a href="#TestNG-报告" class="headerlink" title="TestNG 报告"></a>TestNG 报告</h1><p>TestNG，默认测试报告在当前项目文件夹下的 test-output 文件夹内，index.html是汇总的测试测试报告，用浏览器打开就可以查看了；parameterTest 文件夹下是按测试用例生成的报告，old 文件夹下为历史报告</p>
+<p><img src="https://picture-picture.oss-cn-beijing.aliyuncs.com/img/20240814183859.png" alt="image.png"></p>
+<h1 id="TestNG-功能汇总"><a href="#TestNG-功能汇总" class="headerlink" title="TestNG 功能汇总"></a>TestNG 功能汇总</h1><table>
+<thead>
+<tr>
+<th>功能</th>
+<th>实现</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>测试注释</td>
+<td>@Test</td>
+</tr>
+<tr>
+<td>套件测试</td>
+<td>标签</td>
+</tr>
+<tr>
+<td>在套件中的所有测试运行之前运行</td>
+<td>@BeforeSuite</td>
+</tr>
+<tr>
+<td>在套件中的所有测试运行之后运行</td>
+<td>@AfterSuite</td>
+</tr>
+<tr>
+<td>测试之前运行</td>
+<td>@BeforeTest</td>
+</tr>
+<tr>
+<td>测试之后运行</td>
+<td>@AfterTest</td>
+</tr>
+<tr>
+<td>分组测试</td>
+<td>@Test 的 group 参数</td>
+</tr>
+<tr>
+<td>在调用属于任何这些组的第一个测试方法之前运行</td>
+<td>@BeforeGroups</td>
+</tr>
+<tr>
+<td>在调用属于任何这些组的第一个测试方法之后运行</td>
+<td>@AfterGroups</td>
+</tr>
+<tr>
+<td>在调用当前类的第一个测试方法之前运行</td>
+<td>@BeforeClass</td>
+</tr>
+<tr>
+<td>在调用当前类的第一个测试方法之后运行</td>
+<td>@AfterClass</td>
+</tr>
+<tr>
+<td>在每个测试方法之前运行</td>
+<td>@BeforeMethod</td>
+</tr>
+<tr>
+<td>在每个测试方法之后运行</td>
+<td>@AfterMethod</td>
+</tr>
+<tr>
+<td>预期的异常</td>
+<td>@Test (expectedExceptions &#x3D; ArithmeticException. class)</td>
+</tr>
+<tr>
+<td>超时测试</td>
+<td>@Test (timeout&#x3D;1000)</td>
+</tr>
+<tr>
+<td>参数化测试</td>
+<td>@Parameters 或 DataProvider</td>
+</tr>
+<tr>
+<td>依赖测试</td>
+<td>@Test 的 dependsOnMethods 参数</td>
+</tr>
+</tbody></table>
+<h1 id="TestNG-与-Junit4-区别"><a href="#TestNG-与-Junit4-区别" class="headerlink" title="TestNG 与 Junit4 区别"></a>TestNG 与 Junit4 区别</h1><h2 id="注释支持"><a href="#注释支持" class="headerlink" title="注释支持"></a>注释支持</h2><table>
+<thead>
+<tr>
+<th>特点</th>
+<th>JUnit 4</th>
+<th>TestNG</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>测试注释</td>
+<td>@Test</td>
+<td>@Test</td>
+</tr>
+<tr>
+<td>在套件中的所有测试运行之前运行</td>
+<td>-</td>
+<td>@BeforeSuite</td>
+</tr>
+<tr>
+<td>在套件中的所有测试运行之后运行</td>
+<td>-</td>
+<td>@AfterSuite</td>
+</tr>
+<tr>
+<td>测试之前运行</td>
+<td>-</td>
+<td>@BeforeTest</td>
+</tr>
+<tr>
+<td>测试之后运行</td>
+<td>-</td>
+<td>@AfterTest</td>
+</tr>
+<tr>
+<td>在调用属于任何这些组的第一个测试方法之前运行</td>
+<td>-</td>
+<td>@BeforeGroups</td>
+</tr>
+<tr>
+<td>在调用属于任何这些组的第一个测试方法之后运行</td>
+<td>-</td>
+<td>@AfterGroups</td>
+</tr>
+<tr>
+<td>在调用当前类的第一个测试方法之前运行</td>
+<td>@BeforeClass</td>
+<td>@BeforeClass</td>
+</tr>
+<tr>
+<td>在调用当前类的第一个测试方法之后运行</td>
+<td>@AfterClass</td>
+<td>@AfterClass</td>
+</tr>
+<tr>
+<td>在每个测试方法之前运行</td>
+<td>@Before</td>
+<td>@BeforeMethod</td>
+</tr>
+<tr>
+<td>在每个测试方法之后运行</td>
+<td>@After</td>
+<td>@AfterMethod</td>
+</tr>
+<tr>
+<td>忽略测试</td>
+<td>@ignore</td>
+<td>@Test(enbale&#x3D;false)</td>
+</tr>
+<tr>
+<td>预期的异常</td>
+<td>@Test(expected &#x3D; ArithmeticException.class)</td>
+<td>@Test(expectedExceptions &#x3D; ArithmeticException.class)</td>
+</tr>
+<tr>
+<td>超时测试</td>
+<td>@Test(timeout &#x3D; 1000)</td>
+<td>@Test(timeout &#x3D; 1000)</td>
+</tr>
+</tbody></table>
+<p>JUnit4 和 TestNG 之间的主要注释差异是：</p>
+<ol>
+<li>在 JUnit4 中，必须声明 <code>“@BeforeClass </code>”和“<code>@AfterClass</code>”方法作为静态方法。 TestNG在方法声明中更灵活，它没有这个约束</li>
+<li>3 个额外的 setUp&#x2F;tearDown 级别：test，suite 和 grouup</li>
+</ol>
+<figure class="highlight java"><figcaption><span>file:JUnit4</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@BeforeClass</span> <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">oneTimeSetUp</span><span class="params">()</span> &#123; </span><br><span class="line">	<span class="comment">// one-time initialization code </span></span><br><span class="line">	System.out.println(<span class="string">&quot;@BeforeClass - oneTimeSetUp&quot;</span>); </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><figcaption><span>file:TestNG</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@BeforeClass</span> <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">oneTimeSetUp</span><span class="params">()</span> &#123; </span><br><span class="line">	<span class="comment">// one-time initialization code </span></span><br><span class="line">	System.out.println(<span class="string">&quot;@BeforeClass - oneTimeSetUp&quot;</span>); </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="异常测试"><a href="#异常测试" class="headerlink" title="异常测试"></a>异常测试</h2><p>“异常测试”是指从单元测试中抛出的异常，此功能在 JUnit 4 和 TestNG 中都可实现</p>
+<figure class="highlight java"><figcaption><span>file:JUint4</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test(expected = ArithmeticException.class)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">divisionWithException</span><span class="params">()</span> &#123;</span><br><span class="line">  <span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">1</span>/<span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><figcaption><span>file:TestNG</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test(expectedExceptions = ArithmeticException.class)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">divisionWithException</span><span class="params">()</span> &#123;</span><br><span class="line">  <span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">1</span>/<span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="忽略测试"><a href="#忽略测试" class="headerlink" title="忽略测试"></a>忽略测试</h2><p>“忽略”表示是否应该忽略单元测试，该功能在JUnit 4和TestNG中均可实现</p>
+<figure class="highlight java"><figcaption><span>file:JUnit4</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Ignore(&quot;Not Ready to Run&quot;)</span></span><br><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">divisionWithException</span><span class="params">()</span> &#123;</span><br><span class="line">  System.out.println(<span class="string">&quot;Method is not ready yet&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><figcaption><span>file:TestNG</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test(timeOut = 1000)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">infinity</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="keyword">while</span> (<span class="literal">true</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="时间测试"><a href="#时间测试" class="headerlink" title="时间测试"></a>时间测试</h2><p>时间测试表示如果单元测试所花费的时间超过指定的毫秒数，则测试将会终止，并将其标记为失败，此功能在JUnit 4和TestNG中均可实现</p>
+<figure class="highlight java"><figcaption><span>file:JUnit4</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test(timeout = 1000)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">infinity</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="keyword">while</span> (<span class="literal">true</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><figcaption><span>file:TestNG</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test(timeOut = 1000)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">infinity</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="keyword">while</span> (<span class="literal">true</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="套件测试"><a href="#套件测试" class="headerlink" title="套件测试"></a>套件测试</h2><p>套件测试是指<strong>捆绑几个单元测试并一起运行</strong>。 此功能在JUnit 4和TestNG中都可实现。 然而，两者都使用非常不同的方法来实现它。</p>
+<blockquote>
+<p>[!note] JUint4</p>
+</blockquote>
+<p>@RunWith 和 @Suite。下面的类表示在 <code>JunitTest5</code> 执行之后，单元测试<code>JunitTest1</code> 和 <code>JunitTest2</code> 一起运行。所有的声明都是在类内定义的</p>
+<figure class="highlight java"><figcaption><span>file:Juint4</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RunWith(Suite.class)</span></span><br><span class="line"><span class="meta">@Suite</span>.SuiteClasses(&#123;</span><br><span class="line">        JunitTest1.class,</span><br><span class="line">        JunitTest2.class</span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">JunitTest5</span> &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>&#96;&#96;</p>
+<blockquote>
+<p>[!note] TestNG</p>
+</blockquote>
+<p>XML 文件用于运行套件测试。以下XML文件表示单元测试 <code>TestNGTest1</code> 和<code>TestNGTest2</code>将一起运行</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">suite</span> <span class="attr">name</span>=<span class="string">&quot;My test suite&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">test</span> <span class="attr">name</span>=<span class="string">&quot;testing&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">classes</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">class</span> <span class="attr">name</span>=<span class="string">&quot;com.fsecure.demo.testng.TestNGTest1&quot;</span> /&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">class</span> <span class="attr">name</span>=<span class="string">&quot;com.fsecure.demo.testng.TestNGTest2&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">classes</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">test</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">suite</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>TestNG可以做捆绑类测试，也可以捆绑方法测试。 凭借TestNG独特的“分组”概念，每种方法都可以与一个组合相结合，可以根据功能对测试进行分类(分组)。 例如，</p>
+<p>下面是一个有四个方法的类，三个组( <code>method1</code>，<code>method2</code> 和 <code>method3</code> )</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test(groups=&quot;method1&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">testingMethod1</span><span class="params">()</span> &#123;</span><br><span class="line">  System.out.println(<span class="string">&quot;Method - testingMethod1()&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Test(groups=&quot;method2&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">testingMethod2</span><span class="params">()</span> &#123;</span><br><span class="line">    System.out.println(<span class="string">&quot;Method - testingMethod2()&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Test(groups=&quot;method1&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">testingMethod1_1</span><span class="params">()</span> &#123;</span><br><span class="line">    System.out.println(<span class="string">&quot;Method - testingMethod1_1()&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Test(groups=&quot;method4&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">testingMethod4</span><span class="params">()</span> &#123;</span><br><span class="line">    System.out.println(<span class="string">&quot;Method - testingMethod4()&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>使用以下XML文件，可以仅使用组 <code>method1</code> 执行单元测试</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">suite</span> <span class="attr">name</span>=<span class="string">&quot;My test suite&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">test</span> <span class="attr">name</span>=<span class="string">&quot;testing&quot;</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">groups</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">run</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">include</span> <span class="attr">name</span>=<span class="string">&quot;method1&quot;</span>/&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">run</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">groups</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">classes</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">class</span> <span class="attr">name</span>=<span class="string">&quot;com.fsecure.demo.testng.TestNGTest5_2_0&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">classes</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">test</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">suite</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>通过“分组”测试概念，集成测试的可能性是无限制的。例如，我们只能从所有单元测试类中测试 <code>DatabaseFuntion</code> 分组</p>
+<h2 id="参数化测试"><a href="#参数化测试" class="headerlink" title="参数化测试"></a>参数化测试</h2><p>参数化测试是指单位测试参数值的变化。 此功能在JUnit 4和TestNG中都实现。 然而，两者都使用非常不同的方法来实现它</p>
+<blockquote>
+<p>[!note] JUint4</p>
+</blockquote>
+<p>@RunWitch 和@Parameter 用于提供单元测试的参数值，@Parameters 必须返回 List[]，参数将作为参数传入类构造函数</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RunWith(value = Parameterized.class)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">JunitTest6</span> &#123;</span><br><span class="line"></span><br><span class="line">     <span class="keyword">private</span> <span class="type">int</span> number;</span><br><span class="line"></span><br><span class="line">     <span class="keyword">public</span> <span class="title function_">JunitTest6</span><span class="params">(<span class="type">int</span> number)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.number = number;</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line">     <span class="meta">@Parameters</span></span><br><span class="line">     <span class="keyword">public</span> <span class="keyword">static</span> Collection&lt;Object[]&gt; data() &#123;</span><br><span class="line">       Object[][] data = <span class="keyword">new</span> <span class="title class_">Object</span>[][] &#123; &#123; <span class="number">1</span> &#125;, &#123; <span class="number">2</span> &#125;, &#123; <span class="number">3</span> &#125;, &#123; <span class="number">4</span> &#125; &#125;;</span><br><span class="line">       <span class="keyword">return</span> Arrays.asList(data);</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line">     <span class="meta">@Test</span></span><br><span class="line">     <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">pushTest</span><span class="params">()</span> &#123;</span><br><span class="line">       System.out.println(<span class="string">&quot;Parameterized Number is : &quot;</span> + number);</span><br><span class="line">     &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里有很多限制，我们必须遵循 JUnit 的方式来声明参数，并且必须将参数传递给构造函数才能初始化类成员作为测试的参数值。参数类的返回类型为 <code>List []</code>，数据已被限制为String或用于测试的原始类型值。</p>
+<blockquote>
+<p>[!note] TestNG</p>
+</blockquote>
+<p>XML 文件或者 @DataProvider 用于提供不同参数进行测试：</p>
+<p>只有 @Parameters 在需要参数测试的方法中声明，参数化数据将在 TestNG 的 XML 配置文件中提供。通过这样做，我们可以使用不同数据集的单个测试用例，甚至获得不同的结果。另外，即使是最终用户，QA 还是 QE 都可以在 XML 文件中提供自己的数据进行测试</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">TestNGTest6_1_0</span> &#123;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="meta">@Parameters(value=&quot;number&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">parameterIntTest</span><span class="params">(<span class="type">int</span> number)</span> &#123;</span><br><span class="line">       System.out.println(<span class="string">&quot;Parameterized Number is : &quot;</span> + number);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">suite</span> <span class="attr">name</span>=<span class="string">&quot;My test suite&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">test</span> <span class="attr">name</span>=<span class="string">&quot;testing&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">parameter</span> <span class="attr">name</span>=<span class="string">&quot;number&quot;</span> <span class="attr">value</span>=<span class="string">&quot;2&quot;</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">classes</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">class</span> <span class="attr">name</span>=<span class="string">&quot;com.fsecure.demo.testng.TestNGTest6_0&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">classes</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">test</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">suite</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>@DataProvider 用于参数化测试：</p>
+<p>将数据值拉入XML文件可能非常方便，但测试偶尔会需要复杂的类型，这些类型不能被表示为一个字符串或一个原始类型值。TestNG 使用 @DataProvider 注解来处理这种情况，这有助于将复杂参数类型映射到测试方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test(dataProvider = &quot;Data-Provider-Function&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">parameterIntTest</span><span class="params">(Class clzz, String[] number)</span> &#123;</span><br><span class="line">   System.out.println(<span class="string">&quot;Parameterized Number is : &quot;</span> + number[<span class="number">0</span>]);</span><br><span class="line">   System.out.println(<span class="string">&quot;Parameterized Number is : &quot;</span> + number[<span class="number">1</span>]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//This function will provide the patameter data</span></span><br><span class="line"><span class="meta">@DataProvider(name = &quot;Data-Provider-Function&quot;)</span></span><br><span class="line"><span class="keyword">public</span> Object[][] parameterIntTestProvider() &#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Object</span>[][]&#123;</span><br><span class="line">			   &#123;Vector.class, <span class="keyword">new</span> <span class="title class_">String</span>[] &#123;<span class="string">&quot;java.util.AbstractList&quot;</span>,</span><br><span class="line"><span class="string">&quot;java.util.AbstractCollection&quot;</span>&#125;&#125;,</span><br><span class="line">			   &#123;String.class, <span class="keyword">new</span> <span class="title class_">String</span>[] &#123;<span class="string">&quot;1&quot;</span>, <span class="string">&quot;2&quot;</span>&#125;&#125;,</span><br><span class="line">			   &#123;Integer.class, <span class="keyword">new</span> <span class="title class_">String</span>[] &#123;<span class="string">&quot;1&quot;</span>, <span class="string">&quot;2&quot;</span>&#125;&#125;</span><br><span class="line">			  &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>@DataProvider 作为对象的参数：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test(dataProvider = &quot;Data-Provider-Function&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">parameterIntTest</span><span class="params">(TestNGTest6_3_0 clzz)</span> &#123;</span><br><span class="line">   System.out.println(<span class="string">&quot;Parameterized Number is : &quot;</span> + clzz.getMsg());</span><br><span class="line">   System.out.println(<span class="string">&quot;Parameterized Number is : &quot;</span> + clzz.getNumber());</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//This function will provide the patameter data</span></span><br><span class="line"><span class="meta">@DataProvider(name = &quot;Data-Provider-Function&quot;)</span></span><br><span class="line"><span class="keyword">public</span> Object[][] parameterIntTestProvider() &#123;</span><br><span class="line"></span><br><span class="line">    <span class="type">TestNGTest6_3_0</span> <span class="variable">obj</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">TestNGTest6_3_0</span>();</span><br><span class="line">    obj.setMsg(<span class="string">&quot;Hello&quot;</span>);</span><br><span class="line">    obj.setNumber(<span class="number">123</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Object</span>[][]&#123;</span><br><span class="line">               &#123;obj&#125;</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>TestNG的参数化测试非常用户友好和灵活（在 XML 文件或类内），它可以支持许多复杂的数据类型作为参数值，可能性是无限的。如上例所示，我们甚至可以传入我们自己的对象<code>TestNGTest6_3_0</code>进行参数化测试</p>
+<h2 id="依赖性测试"><a href="#依赖性测试" class="headerlink" title="依赖性测试"></a>依赖性测试</h2><p>表示方法是依赖性测试，它将在所需方法之前执行。 如果依赖方法失败，则所有后续测试将会被跳过，不会被标记为失败</p>
+<p>JUint4：JUnit框架着重于测试隔离; 目前它不支持此功能</p>
+<p>TestNG：使用 dependsOnMethod 来实现依赖测试：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">method1</span><span class="params">()</span> &#123;</span><br><span class="line">   System.out.println(<span class="string">&quot;This is method 1&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Test(dependsOnMethods=&#123;&quot;method1&quot;&#125;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">method2</span><span class="params">()</span> &#123;</span><br><span class="line">    System.out.println(<span class="string">&quot;This is method 2&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>method2() 只有在 method1() 运行成功下才会执行，否则 method2()将跳过测试</p>
+</article><div class="tag_share"><div class="post_share"></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2024/07/20/pytest%E5%AD%A6%E4%B9%A0/" title="pytest 学习"><img class="cover" src="https://picture-picture.oss-cn-beijing.aliyuncs.com/wallhaven-exrqrr.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">pytest 学习</div></div></a></div><div class="next-post pull-right"><a href="/2024/06/10/Selenium%E5%AD%A6%E4%B9%A0/" title="Selenium 学习"><img class="cover" src="https://picture-picture.oss-cn-beijing.aliyuncs.com/wallhaven-exrqrr.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Selenium 学习</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#TestNG-%E4%BD%BF%E7%94%A8%E6%B5%81%E7%A8%8B"><span class="toc-number">1.</span> <span class="toc-text">TestNG 使用流程</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#TestNG-%E5%B8%B8%E7%94%A8%E6%B3%A8%E8%A7%A3"><span class="toc-number">2.</span> <span class="toc-text">TestNG 常用注解</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#TestNG-XML-%E6%A0%87%E7%AD%BE"><span class="toc-number">3.</span> <span class="toc-text">TestNG XML 标签</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#suite-%E6%A0%87%E7%AD%BE"><span class="toc-number">3.1.</span> <span class="toc-text">suite 标签</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#test-%E6%A0%87%E7%AD%BE"><span class="toc-number">3.2.</span> <span class="toc-text">test 标签</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#group-%E6%A0%87%E7%AD%BE"><span class="toc-number">3.3.</span> <span class="toc-text">group 标签</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B6%E4%BB%96%E6%A0%87%E7%AD%BE"><span class="toc-number">3.4.</span> <span class="toc-text">其他标签</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#TestNG-%E5%B8%B8%E7%94%A8%E6%96%AD%E8%A8%80"><span class="toc-number">4.</span> <span class="toc-text">TestNG 常用断言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#TestNG-%E5%8F%82%E6%95%B0%E4%BC%A0%E9%80%92"><span class="toc-number">5.</span> <span class="toc-text">TestNG 参数传递</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Parameters"><span class="toc-number">5.1.</span> <span class="toc-text">@Parameters</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DataProvider"><span class="toc-number">5.2.</span> <span class="toc-text">@DataProvider</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#TestNG-%E9%A2%84%E6%9C%9F%E5%BC%82%E5%B8%B8%E6%B5%8B%E8%AF%95"><span class="toc-number">6.</span> <span class="toc-text">TestNG 预期异常测试</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#TestNG-%E5%BF%BD%E7%95%A5%E6%B5%8B%E8%AF%95"><span class="toc-number">7.</span> <span class="toc-text">TestNG 忽略测试</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#TestNG-%E8%B6%85%E6%97%B6%E6%B5%8B%E8%AF%95"><span class="toc-number">8.</span> <span class="toc-text">TestNG 超时测试</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#TestNG-%E5%88%86%E7%BB%84%E6%B5%8B%E8%AF%95"><span class="toc-number">9.</span> <span class="toc-text">TestNG 分组测试</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#TestNG-%E5%88%86-suite-%E6%B5%8B%E8%AF%95"><span class="toc-number">10.</span> <span class="toc-text">TestNG 分 suite 测试</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#TestNG-%E4%BE%9D%E8%B5%96%E6%B5%8B%E8%AF%95"><span class="toc-number">11.</span> <span class="toc-text">TestNG 依赖测试</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#TestNG-%E6%8A%A5%E5%91%8A"><span class="toc-number">12.</span> <span class="toc-text">TestNG 报告</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#TestNG-%E5%8A%9F%E8%83%BD%E6%B1%87%E6%80%BB"><span class="toc-number">13.</span> <span class="toc-text">TestNG 功能汇总</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#TestNG-%E4%B8%8E-Junit4-%E5%8C%BA%E5%88%AB"><span class="toc-number">14.</span> <span class="toc-text">TestNG 与 Junit4 区别</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B3%A8%E9%87%8A%E6%94%AF%E6%8C%81"><span class="toc-number">14.1.</span> <span class="toc-text">注释支持</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%82%E5%B8%B8%E6%B5%8B%E8%AF%95"><span class="toc-number">14.2.</span> <span class="toc-text">异常测试</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BF%BD%E7%95%A5%E6%B5%8B%E8%AF%95"><span class="toc-number">14.3.</span> <span class="toc-text">忽略测试</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%97%B6%E9%97%B4%E6%B5%8B%E8%AF%95"><span class="toc-number">14.4.</span> <span class="toc-text">时间测试</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A5%97%E4%BB%B6%E6%B5%8B%E8%AF%95"><span class="toc-number">14.5.</span> <span class="toc-text">套件测试</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E6%95%B0%E5%8C%96%E6%B5%8B%E8%AF%95"><span class="toc-number">14.6.</span> <span class="toc-text">参数化测试</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BE%9D%E8%B5%96%E6%80%A7%E6%B5%8B%E8%AF%95"><span class="toc-number">14.7.</span> <span class="toc-text">依赖性测试</span></a></li></ol></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2023 - 2024 By Ethan</div><div class="footer_custom_text">Hi, welcome to my <a target="_blank" rel="noopener" href="https://ethan-tsui.github.io/">blog</a>!</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="chat-btn" type="button" title="聊天"><i class="fas fa-sms"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=4.13.0"></script><script src="/js/main.js?v=4.13.0"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.umd.min.js"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/pangu@4.0.7/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.autoSpacingPage()
+      })
+  }
+}
+
+function panguInit () {
+  if (true){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><div class="js-pjax"></div><script defer="defer" id="ribbon" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/dist/canvas-ribbon.min.js" size="150" alpha="0.6" zIndex="-1" mobile="false" data-click="false"></script><script defer="defer" id="fluttering_ribbon" mobile="true" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/dist/canvas-fluttering-ribbon.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div class="docsearch-wrap"><div id="docsearch" style="display:none"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3.5.2/dist/style.min.css"/><script src="https://cdn.jsdelivr.net/npm/@docsearch/js@3.5.2/dist/umd/index.min.js"></script><script>(() => {
+  docsearch(Object.assign({
+    appId: 'VZ4QTD5D9F',
+    apiKey: '2f3da2750be0865bc553ee8c412e7831',
+    indexName: 'ethan_tsui@foxmail.com',
+    container: '#docsearch',
+  }, null))
+
+  const handleClick = () => {
+    document.querySelector('.DocSearch-Button').click()
+  }
+
+  const searchClickFn = () => {
+    btf.addEventListenerPjax(document.querySelector('#search-button > .search'), 'click', handleClick)
+  }
+
+  searchClickFn()
+  window.addEventListener('pjax:complete', searchClickFn)
+})()</script></div></div></body></html>
